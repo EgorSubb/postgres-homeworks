@@ -1,6 +1,6 @@
 """Скрипт для заполнения данными таблиц в БД Postgres."""
 import csv
-from utils import *
+# from utils import *
 from classes import Table
 import psycopg2
 
@@ -44,6 +44,11 @@ try:
 finally:
     conn.close()
 
+conn = psycopg2.connect(host="localhost",
+                        database="north",
+                        user="postgres",
+                        password="Subbotin1")
+
 try:
     with conn:
         with conn.cursor() as cursor:
@@ -52,11 +57,16 @@ try:
                 next(reader)
                 for row in reader:
                     cursor.execute(
-                        "INSERT INTO employees (employee_id, first_name, last_name, title, birth_date, notes) VALUES (%s, %s, %s, %s, %s, %s)",
+                        "INSERT INTO employees (employee_id, first_name, last_name, title, birth_day, notes) VALUES (%s, %s, %s, %s, %s, %s)",
                         row
                     )
 finally:
     conn.close()
+
+conn = psycopg2.connect(host="localhost",
+                        database="north",
+                        user="postgres",
+                        password="Subbotin1")
 
 try:
     with conn:
