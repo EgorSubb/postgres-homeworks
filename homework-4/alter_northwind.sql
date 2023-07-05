@@ -16,3 +16,6 @@ SELECT product_name, discontinued INTO discontinued_products FROM products WHERE
 
 ALTER TABLE order_details DROP CONSTRAINT fk_order_details_product_id
 DELETE FROM products WHERE discontinued = 1
+ALTER TABLE order_details
+ADD CONSTRAINT fk_order_details_product_id
+FOREIGN KEY (product_id) REFERENCES products (product_id);
